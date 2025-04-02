@@ -27,7 +27,7 @@ class TaikoQFunction(nn.Module):
         self.fc4 = nn.Linear(16, self.action_dim)
 
     def forward(self,state):
-        x = F.leaky_relu(self.conv2(F.leaky_relu(self.conv1(state[-1]))))
+        x = F.leaky_relu(self.conv2(F.leaky_relu(self.conv1(state))))
         x = x.view( -1,272)
         return self.fc4( F.leaky_relu(self.fc3(x)))
 

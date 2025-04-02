@@ -80,15 +80,13 @@ def stop_osu(process):
 def move_to_songs(star=1):
     hc = pyclick.HumanClicker()
     time.sleep(0.5)
-    hc.move((1257, 733), 0.1)
+    hc.move((969, 578), 0.1)
     hc.click()
-    hc.move((1796, 469), 0.5)
+    hc.move((1266, 335), 0.5)
     hc.click()
     time.sleep(0.2)
     hc.click()
     time.sleep(0.5)
-    hc.click()
-    time.sleep(1)
     launch_random_beatmap()
     if star is not None:
         hc.move((1750, 110 + (star-1) * 60), 1)
@@ -102,10 +100,10 @@ def move_to_songs(star=1):
 
 def launch_random_beatmap():######
     hc = pyclick.HumanClicker()
-    pyautogui.mouseUp(button='left')
-    pyautogui.mouseUp(button='right')
-    time.sleep(0.1)
-    hc.move((808,1319), 0.25)
+    #pyautogui.mouseUp(button='left')
+    #pyautogui.mouseUp(button='right')
+    #time.sleep(0.1)
+    hc.move((607,991), 0.25)
     time.sleep(0.1)
     hc.click()
     time.sleep(3.3)
@@ -113,8 +111,8 @@ def launch_random_beatmap():######
     #time.sleep(0.2)
     #hc.click()
     #time.sleep(0.1)
-    hc.move((500, 320), 0.3)
-    time.sleep(0.7)
+    #hc.move((500, 320), 0.3)
+    #time.sleep(0.7)
     return
 
 
@@ -136,12 +134,9 @@ def select_beatmap(search_name):
 def launch_selected_beatmap():#已完成
     hc = pyclick.HumanClicker()
     time.sleep(0.2)
-    hc.move((2433,1292), 0.6)
-    time.sleep(0.25)
+    hc.move((1820,972), 0.6)
+    time.sleep(0.2)
     hc.click()
-    time.sleep(0.3)
-    hc.move((500, 320), 0.3)
-    time.sleep(0.7)
     return
 
 

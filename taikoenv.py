@@ -1,24 +1,21 @@
+import time
 from typing import Optional
 
 import easyocr
 import gym
 import keyboard
+import pyautogui
 import torch
 from gym import spaces
 from gym.core import ActType
 
 import taiko_utils
+from taiko_utils import taiko_acc_region,taiko_score_region,taiko_play_region
 import utils.osu_routines
 
 #from utils.screen import TAIKO_REGION
 """根据自己屏幕分辨率来确定，默认为1920*1080的情况"""
-taiko_score_region=(1565,0,1920,70)
-taiko_acc_region=(1745,120,120,40)
-taiko_play_region = (0,350,800,190)
-def get_width()->int:
-    return taiko_play_region[2]//10
-def get_height()->int:
-    return taiko_play_region[3]//10
+
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -65,8 +62,8 @@ class TaikoEnv(gym.Env):
         self.previous_score = 0
         self.previous_acc = 0
         tmp = self.get_obs()
-        self.history = torch.zeros((self.stack_size, tmp.shape[1], tmp.shape[2])).unsqueeze(0).to(device)
-        self.history[-1] = tmp
+        self.history = torch.zeros((self.stack_size, tmp.shape[1], tmp.shape[2])).to(device)
+        self.history = tmp
         return self.history
 
 
@@ -81,8 +78,9 @@ class TaikoEnv(gym.Env):
         self.last_action = action
 
         score,acc = taiko_utils.get_scores_and_acc(ocr=self.ocr,score_region=taiko_score_region,acc_region=taiko_acc_region,wndw=self.wndw)
-        self.history[:-1] = self.history[1:]
-        self.history[-1] = self.get_obs()
+        #self.history[:-1] = self.history[1:]
+        print(f"time:{time.time()}\nscore:{score}\nacc:{acc}\n\n")
+        self.history = self.get_obs()
 
         done = (score==acc==-1)
         if score - self.previous_score > 2000.0:
@@ -94,7 +92,7 @@ class TaikoEnv(gym.Env):
 
         self.previous_score = max(self.previous_score, score)
         self.previous_acc = acc
-        return self.history.unsqueeze(0), rew, done
+        return self.history, rew, done
 
     @staticmethod
     def get_obs():
@@ -115,11 +113,10 @@ class TaikoEnv(gym.Env):
 
     @staticmethod
     def fake_action(action)->None:
-        if action.item()==0:
-            return
-        keyboard.send("c") if action.item() == 1 else keyboard.send("v")
-
-        pass
+        if action.item() == 1:
+            pyautogui.click(button='left')
+        elif action.item() == 2:
+            pyautogui.click(button='right')
     def start_game(self):
         """是从选歌界面开始，所以说需要随机选歌加一个点击osu"""
         pass

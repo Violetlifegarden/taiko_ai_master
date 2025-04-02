@@ -1,5 +1,6 @@
 import pyautogui
 import time
+import osu_routines
 
 
 def mouse_locator():
@@ -13,5 +14,6 @@ if __file__ == '__main__':
     mouse_locator()
 
 if __name__ == '__main__':
+    osu_routines.start_osu()
     mouse_locator()
 

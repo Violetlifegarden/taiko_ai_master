@@ -10,8 +10,8 @@ import torch.nn.functional as F
 import utils.checkpoint
 import utils.schedule
 import utils.osu_routines
-from taikoenv import TaikoEnv,get_width,get_height
-from taiko_utils import ReplayMemory2
+from taikoenv import TaikoEnv
+from taiko_utils import ReplayMemory2,get_width,get_height
 from taikomodel import TaikoQFunction
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -56,13 +56,13 @@ class TaikoQTrainer:
         if len(self.memory) < self.min_experience:
             return
         s0, a, r, s1 = self.memory.sample(batch_size=self.batch_size)
-        y = self.q_network(s0.unsqueeze(0))
+        y = self.q_network(s0)
         state_action_values = torch.stack([y[i, a[i]] for i in range(self.batch_size)])  # Get estimated Q(s1,a1)
         next_state_values = self.target_q_network(s1).detach().max(1)[0]
         expected_state_action_values = r.squeeze() + self.gamma * next_state_values
         loss = F.mse_loss(state_action_values, expected_state_action_values)
-        print(f"time={time.time()}")
-        print(f"loss={loss}\n\n")
+        #print(f"time={time.time()}")
+        #print(f"loss={loss}\n")
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()

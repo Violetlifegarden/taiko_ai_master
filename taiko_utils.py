@@ -3,7 +3,13 @@ import cv2
 import torch
 import win32gui
 
-from taikoenv import get_width,get_height
+taiko_score_region=(1565,0,355,70)
+taiko_acc_region=(1745,120,120,40)
+taiko_play_region = (0,350,800,190)
+def get_width()->int:
+    return taiko_play_region[2]//10
+def get_height()->int:
+    return taiko_play_region[3]//10
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -52,10 +58,10 @@ class ReplayMemory2(object):
         self.position = 0
 
     def push(self, *args):
-        self.memory[self.position][0] = args[0].squeeze(0)
+        self.memory[self.position][0] = args[0]
         self.memory[self.position][1][0, 0, 0] = args[1].squeeze(0)
         self.memory[self.position][2][0, 0, 0] = args[2][-1]
-        self.memory[self.position][3] = args[3].squeeze(0)
+        self.memory[self.position][3] = args[3]
         self.position = (self.position + 1) % self.capacity
 
     def sample(self, batch_size):
