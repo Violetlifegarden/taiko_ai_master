@@ -9,10 +9,6 @@ def mouse_locator():
         x, y = pyautogui.position()
         print('(' + str(x) + ', ' + str(y) + ')')
 
-
-if __file__ == '__main__':
-    mouse_locator()
-
 if __name__ == '__main__':
     osu_routines.start_osu()
     mouse_locator()

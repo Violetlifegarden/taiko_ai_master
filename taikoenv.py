@@ -32,24 +32,15 @@ class TaikoEnv(gym.Env):
         self.steps = 0
         self.episode_counter = 0
         self.action_space = spaces.Discrete(3)
-        #self.observation_space = spaces.Box(low=0,high=1,shape=())
-
 
         self.last_action = None
         self.previous_score = None
         self.previous_acc = None
         self.history = None
 
-        self.key_dict = {'c': 0x43, 'v': 0x56}
+        #self.key_dict = {'c': 0x43, 'v': 0x56}
         self.ocr = easyocr.Reader(['ch_sim'])
 
-
-        """#utils.osu_routines.move_to_songs(star=star)
-        #utils.osu_routines.enable_nofail()
-        if beatmap_name is not None:
-            utils.osu_routines.select_beatmap(beatmap_name)
-        else:
-            随机抽一个"""
 
     def reset(
         self,
@@ -76,7 +67,7 @@ class TaikoEnv(gym.Env):
         self.fake_action(action)
         self.steps +=1
         self.last_action = action
-
+        
         score,acc = taiko_utils.get_scores_and_acc(ocr=self.ocr,score_region=taiko_score_region,acc_region=taiko_acc_region,wndw=self.wndw)
         #self.history[:-1] = self.history[1:]
         print(f"time:{time.time()}\nscore:{score}\nacc:{acc}\n\n")

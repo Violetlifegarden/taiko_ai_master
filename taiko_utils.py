@@ -28,8 +28,7 @@ def get_screen_OCR(region:tuple)->np.ndarray:
         x= cv2.cvtColor(np.array(sct.grab(params)), cv2.COLOR_BGRA2RGB)
         return cv2.resize(x,(get_width(),get_height()),fx=0,fy=0,interpolation=cv2.INTER_AREA)
 """OCR识别"""
-import easyocr
-def get_scores_and_acc(ocr,wndw,score_region:tuple=(1565,0,1920,70),acc_region:tuple=(1745,120,120,40),):
+def get_scores_and_acc(ocr,wndw,score_region:tuple=(1565,0,355,70),acc_region:tuple=(1745,120,120,40),):
     score_img = get_screen_OCR(score_region)
     acc_img = get_screen_OCR(acc_region)
     with torch.no_grad():
@@ -49,7 +48,7 @@ def get_scores_and_acc(ocr,wndw,score_region:tuple=(1565,0,1920,70),acc_region:t
 
 """模拟鼠标点击"""
 
-"""经验池（要么就用原来的）"""
+"""经验池"""
 class ReplayMemory2(object):
     def __init__(self, capacity:int):
         """"""

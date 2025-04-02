@@ -100,19 +100,10 @@ def move_to_songs(star=1):
 
 def launch_random_beatmap():######
     hc = pyclick.HumanClicker()
-    #pyautogui.mouseUp(button='left')
-    #pyautogui.mouseUp(button='right')
-    #time.sleep(0.1)
     hc.move((607,991), 0.25)
     time.sleep(0.1)
     hc.click()
     time.sleep(3.3)
-    #hc.move((1750,689), 0.5)
-    #time.sleep(0.2)
-    #hc.click()
-    #time.sleep(0.1)
-    #hc.move((500, 320), 0.3)
-    #time.sleep(0.7)
     return
 
 
@@ -139,56 +130,6 @@ def launch_selected_beatmap():#已完成
     hc.click()
     return
 
-
-def enable_nofail():#已完成
-    hc = pyclick.HumanClicker()
-    time.sleep(0.2)
-    hc.move((684,1328), 0.5)
-    time.sleep(0.2)
-    hc.click()
-    time.sleep(0.2)
-    hc.move((928,412), 0.5)
-    time.sleep(0.15)
-    hc.click()
-    time.sleep(0.2)
-    hc.move((1363, 1167), 0.6)
-    time.sleep(0.15)
-    hc.click()
-    time.sleep(0.3)
-    hc.move((150, 520), 0.7)
-    time.sleep(0.3)
-    return
-
-
-def reset_mods():#####
-    hc = pyclick.HumanClicker()
-    time.sleep(0.25)
-    hc.move((684,1328), 0.4)
-    time.sleep(0.1)
-    hc.click()
-    time.sleep(0.3)
-    hc.move((1325,1016), 0.8)
-    time.sleep(0.3)
-    hc.click()
-    time.sleep(0.2)
-    hc.move((1363, 1167), 0.5)
-    time.sleep(0.1)
-    hc.click()
-    time.sleep(0.4)
-    hc.move((400, 360), 0.8)
-    time.sleep(0.3)
-    return
-
-
-def hide_chat(hc):
-    time.sleep(0.05)
-    hc.move((992, 619), 0.05)
-    time.sleep(0.1)
-    hc.click()
-    time.sleep(0.05)
-    hc.move((400, 220), 0.1)
-
-
 def return_to_beatmap():#######
     hc = pyclick.HumanClicker()
     time.sleep(8)
@@ -197,79 +138,5 @@ def return_to_beatmap():#######
     hc.click()
     time.sleep(0.4)
     hc.click()
-    #hc.move((50, 605), 0.9)
-    #time.sleep(0.15)
-    #hc.click()
     time.sleep(0.4)
     return
-
-
-def shut_annoying_window():
-    hc = pyclick.HumanClicker()
-    time.sleep(1)
-    hc.move((1390, 792), 0.8)
-    time.sleep(0.1)
-    hc.click()
-    return
-
-
-def relocate():
-    hc = pyclick.HumanClicker()
-    time.sleep(0.5)
-    hc.move((404, 312), 0.5)
-    time.sleep(0.1)
-    hc.click()
-    return
-
-
-def restart():
-    hc = pyclick.HumanClicker()
-    time.sleep(3)
-    hc.move((1288,755), 1.0)
-    time.sleep(1)
-    hc.click()
-    time.sleep(0.1)
-    hc.click()
-    time.sleep(0.2)
-    return
-
-
-def return_to_beatmap2():
-    hc = pyclick.HumanClicker()
-    time.sleep(1.5)
-    hc.move((515, 483), 0.9)
-    time.sleep(0.5)
-    hc.click()
-    time.sleep(0.15)
-    hc.click()
-    time.sleep(0.1)
-    return
-
-def enter_game():
-    time.sleep(6)
-    hc = pyclick.HumanClicker()
-    time.sleep(0.5)
-    hc.move((1257, 733),0.1)
-    hc.click()
-    hc.move((1796, 469),0.5)
-    hc.click()
-    time.sleep(0.2)
-    hc.click()
-    return
-def test():
-    hc = pyclick.HumanClicker()
-    hc.move((15,1420), 0.1)
-    hc.click()
-
-    return
-
-
-## DEBUG
-if __name__ == '__main__':
-    process = start_osu()
-    #import utils.mouse_locator
-
-    #utils.mouse_locator.mouse_locator()
-    enter_game()
-
-    # stop_osu(process)

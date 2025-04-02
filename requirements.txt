@@ -1,0 +1,13 @@
+mss
+pyclick
+pyautogui
+opencv-python
+gym
+tqdm
+psutil
+pywin32
+#win32gui
+shapely
+numpy
+easyocr
+

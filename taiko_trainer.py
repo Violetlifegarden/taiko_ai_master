@@ -2,13 +2,11 @@ import _pickle as cPickle
 import bz2
 import math
 import random
-import time
 
 import torch
 import torch.nn.functional as F
 
 import utils.checkpoint
-import utils.schedule
 import utils.osu_routines
 from taikoenv import TaikoEnv
 from taiko_utils import ReplayMemory2,get_width,get_height
@@ -23,8 +21,8 @@ class TaikoQTrainer:
         load_memory, load_optimizer, load_network, load_steps = self.checkpointer.load()
 
         self.batch_size = batch_size
-        self.lr = lr  # Optimiser's learning rate
-        self.gamma = gamma  # Discount factor
+        self.lr = lr
+        self.gamma = gamma
 
         self.q_network = TaikoQFunction(width=get_width(),height=get_height()).to(device)
         self.target_q_network = TaikoQFunction(width=get_width(),height=get_height()).to(device)
